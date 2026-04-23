@@ -22,6 +22,7 @@ void ABasicPlayerController::OnPossess(APawn* InPawn)
 				if (IMC.IsValid())
 				{
 					InputSystem->AddMappingContext(IMC.LoadSynchronous(), 0);
+					// UE_LOG(LogTemp, Warning, TEXT("Input Mapping Context %s added successfully"), *IMC.GetAssetName());
 				}
 			}
 		}
@@ -30,6 +31,8 @@ void ABasicPlayerController::OnPossess(APawn* InPawn)
 
 void ABasicPlayerController::OnUnPossess()
 {
+	Super::OnUnPossess();
+
 	if (IsLocalPlayerController())
 	{
 		UEnhancedInputLocalPlayerSubsystem* InputSystem =

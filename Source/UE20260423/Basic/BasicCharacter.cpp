@@ -51,6 +51,7 @@ void ABasicCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
 		EIC->BindAction(IA_Jump, ETriggerEvent::Triggered, this, &ABasicCharacter::CustomJump);
 		EIC->BindAction(IA_Jump, ETriggerEvent::Completed, this, &ABasicCharacter::StopJumping);
 		EIC->BindAction(IA_Jump, ETriggerEvent::Canceled, this, &ABasicCharacter::StopJumping);
+		// UE_LOG(LogTemp, Warning, TEXT("Input Actions bound successfully"));
 	}
 }
 
@@ -62,6 +63,7 @@ void ABasicCharacter::Move(const FInputActionValue& InValue)
 	FVector ForwardVector = UKismetMathLibrary::GetForwardVector(ControllerRotation);
 	FVector RightVector = UKismetMathLibrary::GetRightVector(ControllerRotation);
 
+	UE_LOG(LogTemp, Warning, TEXT("Input Action Move"));
 	AddMovementInput(ForwardVector * MoveDirection.X);
 	AddMovementInput(RightVector * MoveDirection.Y);
 }
@@ -70,6 +72,7 @@ void ABasicCharacter::Look(const FInputActionValue& InValue)
 {
 	FVector2D LookDirection = InValue.Get<FVector2D>();
 
+	UE_LOG(LogTemp, Warning, TEXT("Input Action Look"));
 	AddControllerPitchInput(LookDirection.Y);
 	AddControllerYawInput(LookDirection.X);
 }

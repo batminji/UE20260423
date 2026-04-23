@@ -9,7 +9,8 @@ public class UE20260423Target : TargetRules
 	{
 		Type = TargetType.Game;
 		DefaultBuildSettings = BuildSettingsVersion.Latest;
+		IncludeOrderVersion = EngineIncludeOrderVersion.Latest;
 
-		ExtraModuleNames.AddRange( new string[] { "UE20260423" } );
+        ExtraModuleNames.AddRange( new string[] { "UE20260423" } );
 	}
 }

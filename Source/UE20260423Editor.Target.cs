@@ -9,7 +9,8 @@ public class UE20260423EditorTarget : TargetRules
 	{
 		Type = TargetType.Editor;
 		DefaultBuildSettings = BuildSettingsVersion.Latest;
+		IncludeOrderVersion = EngineIncludeOrderVersion.Latest;
 
-		ExtraModuleNames.AddRange( new string[] { "UE20260423" } );
+        ExtraModuleNames.AddRange( new string[] { "UE20260423" } );
 	}
 }
