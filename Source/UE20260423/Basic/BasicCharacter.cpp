@@ -20,6 +20,7 @@ ABasicCharacter::ABasicCharacter()
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
 	Camera->SetupAttachment(SpringArm);
 
+	JumpMaxCount = 2;
 }
 
 // Called when the game starts or when spawned
@@ -47,7 +48,7 @@ void ABasicCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
 	{
 		EIC->BindAction(IA_Move, ETriggerEvent::Triggered, this, &ABasicCharacter::Move);
 		EIC->BindAction(IA_Look, ETriggerEvent::Triggered, this, &ABasicCharacter::Look);
-		EIC->BindAction(IA_Jump, ETriggerEvent::Triggered, this, &ABasicCharacter::Jump);
+		EIC->BindAction(IA_Jump, ETriggerEvent::Triggered, this, &ABasicCharacter::CustomJump);
 		EIC->BindAction(IA_Jump, ETriggerEvent::Completed, this, &ABasicCharacter::StopJumping);
 		EIC->BindAction(IA_Jump, ETriggerEvent::Canceled, this, &ABasicCharacter::StopJumping);
 	}
@@ -71,5 +72,22 @@ void ABasicCharacter::Look(const FInputActionValue& InValue)
 
 	AddControllerPitchInput(LookDirection.Y);
 	AddControllerYawInput(LookDirection.X);
+}
+
+void ABasicCharacter::CustomJump()
+{
+	if (CurrentJumpCount < 2)
+	{		
+		LaunchCharacter(FVector(0.f, 0.f, JumpHeight), false, true);
+		CurrentJumpCount++;
+		JumpHeight *= 2.0f;
+	}
+}
+
+void ABasicCharacter::Landed(const FHitResult& Hit)
+{
+	Super::Landed(Hit);
+	CurrentJumpCount = 0;
+	JumpHeight = 500.0f;
 }
 

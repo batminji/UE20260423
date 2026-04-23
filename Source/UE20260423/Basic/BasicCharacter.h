@@ -49,4 +49,9 @@ public:
 
 	void Move(const FInputActionValue& InValue);
 	void Look(const FInputActionValue& InValue);
+
+	int32 CurrentJumpCount = 0;
+	float JumpHeight = 500.0f;
+	void CustomJump();
+	virtual void Landed(const FHitResult& Hit) override;
 };
